@@ -1,15 +1,18 @@
 " { A Clock by <Mychel/> } "
 
 
+# Used libraries
 from time import strftime
 import os
 import locale
 import flet as ft
 
 
+# Setting the locale to "Portuguese-Brazil"
 locale.setlocale(locale.LC_ALL, 'pt_br.UTF-8')
 
 
+# Creating the Application
 def clock(app: ft.Page):
     "Function that allow us to create the App."
 
@@ -23,13 +26,16 @@ def clock(app: ft.Page):
     app.window_title_bar_hidden = True
     app.window_always_on_top = True
 
+    # Function to close the window by clicking on the close button
     def close_window(_):
         app.window_close()
 
+    # Function to minimize the window by clicking on the minimize button
     def minimize_window(_):
         app.window_minimized = True
         app.update()
 
+    # Function to change the app theme mode between dark and light
     def change_theme(_):
         if app.theme_mode == 'dark':
             app.theme_mode = 'light'
@@ -43,10 +49,13 @@ def clock(app: ft.Page):
 
         app.update()
 
-    def get_current_hour(_):
+    # Function that get the current time
+    def get_current_time(_):
         current_hour.value = strftime('%H:%M:%S')
         app.update()
 
+    # Creating some variables containing "Flet Controls"
+    # Current date text control
     current_date = ft.Text(
         font_family='Georgia',
         style='headlineSmall',
@@ -54,6 +63,7 @@ def clock(app: ft.Page):
         value=strftime('%A, %d de %B de %Y')
     )
 
+    # Current hour text control
     current_hour = ft.Text(
         font_family='Georgia',
         style='displayMedium',
@@ -61,6 +71,7 @@ def clock(app: ft.Page):
         color='#9400D3'
     )
 
+    # Window drag area control
     draggable_area = ft.Row(
         controls=[
             ft.WindowDragArea(
@@ -115,6 +126,7 @@ def clock(app: ft.Page):
         ]
     )
 
+    # Adding the controls to the app window
     app.add(
         draggable_area,
 
@@ -135,8 +147,9 @@ def clock(app: ft.Page):
         current_hour
     )
 
+    # Loop to get the current time without stopping
     while True:
-        get_current_hour(app)
+        get_current_time(app)
 
 
 ft.app(target=clock)
