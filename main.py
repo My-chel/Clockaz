@@ -25,6 +25,7 @@ def clock(app: ft.Page):
     app.padding = 0
     app.window_title_bar_hidden = True
     app.window_always_on_top = True
+    app.window_center()
 
     # Function to close the window by clicking on the close button
     def close_window(_):
